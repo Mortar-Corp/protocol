@@ -1,29 +1,28 @@
 //SPDX-License-Identifier: MIT
-// contracts/ERC721.sol
+pragma solidity ^0.8.4;
+ 
+import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
+import '@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol';
+import '@openzeppelin/contracts/utils/Counters.sol';
 
-pragma solidity >=0.6.2;
+contract NFT is ERC721URIStorage {
+    using Counters for Counters.Counter;
+    Counters.Counter private _tokenIds;
+    address contractAddress;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
+    // constructor set up our address
+    constructor(address marketplaceAddress) ERC721('Croft', 'CROFT') {
+        contractAddress = marketplaceAddress;
+    }
 
-contract NFT is ERC721 {
-  using Counters for Counters.Counter;
-  Counters.Counter private _tokenIds;
+    function mintToken(string memory tokenURI) public returns(uint) {
+        _tokenIds.increment();
+        uint256 newItemId = _tokenIds.current();
 
-  constructor() ERC721("GameItem", "ITM") {}
-
-  // commented out unused variable
-  // function awardItem(address player, string memory tokenURI)
-  function awardItem(address player)
-    public
-    returns (uint256)
-  {
-    _tokenIds.increment();
-
-    uint256 newItemId = _tokenIds.current();
-    _mint(player, newItemId);
-    // _setTokenURI(newItemId, tokenURI);
-
-    return newItemId;
-  }
+        _mint(msg.sender, newItemId);
+        _setTokenURI(newItemId, tokenURI);
+        setApprovalForAll(contractAddress, true);
+        // mint the token and set it for sale - return the id to do so 
+        return newItemId;
+    }
 }
