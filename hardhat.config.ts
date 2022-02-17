@@ -10,11 +10,12 @@ module.exports = {
       hardhat: {
          chainId: 1337
       },
-      // mumbai: {
-      //    url: API_URL,
-      //    accounts: [`0x${PRIVATE_KEY}`]
-      // },
-      // matic: {
+      // using Alchemy
+      mumbai: {
+         url: API_URL,
+         accounts: [`0x${PRIVATE_KEY}`]
+      },
+      // mainnet: {
       //    url: `https://polygon-mainnet.infura.io/v3/${infuraId}`,
       //    accounts: [`0x${PRIVATE_KEY}`]
       // }

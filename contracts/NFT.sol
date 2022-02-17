@@ -9,7 +9,7 @@ contract NFT is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
     address contractAddress;
-
+    
     // constructor set up our address
     constructor(address marketplaceAddress) ERC721('Croft', 'CROFT') {
         contractAddress = marketplaceAddress;
