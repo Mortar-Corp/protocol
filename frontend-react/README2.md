@@ -1,0 +1,1 @@
+npm run start when cd into frontend-react to run
