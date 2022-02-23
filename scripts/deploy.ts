@@ -14,8 +14,8 @@ async function main() {
   console.log("NFT contract deployed to: ", nft.address);
 
   let config = `
-  export const nftmarketaddress = "${market.address}"
   export const nftaddress = "${nft.address}"
+  export const nftmarketaddress = "${market.address}"
   `
 
   let data = JSON.stringify(config)

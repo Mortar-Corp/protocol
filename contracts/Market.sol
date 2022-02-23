@@ -5,8 +5,11 @@ import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import '@openzeppelin/contracts/utils/Counters.sol';
 import 'hardhat/console.sol';
+import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol";
 
-contract Market is ReentrancyGuard {
+
+// TODO make this a receiver of 1155
+contract Market is ReentrancyGuard, ERC1155Holder {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
     Counters.Counter private _tokensSold;
