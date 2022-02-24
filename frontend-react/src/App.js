@@ -1,22 +1,23 @@
 import React from 'react';
-
 import Header from './components/Header';
 import Listings from './pages/Listings';
 import Home from './pages/Home';
-import { Switch} from "react-router-dom";
+import FAQ from './pages/FAQ'
 
-
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import { Routes, Route, BrowserRouter} from "react-router-dom";
 
 function App() {
   return (
     <div className = "App">
-      <Header />
       <BrowserRouter>
-        <Routes>
-          <Route path="/home" exact component ={<Home />}/>
-          <Route path="/listings" exact component ={<Listings />}/>
-        </Routes>
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/home" exact element ={<Home />} />
+            <Route path="/listings" element ={<Listings />} />
+            <Route path="/FAQ" element ={<FAQ />} />
+          </Routes>
+        </main>
       </BrowserRouter>
     </div>
   );

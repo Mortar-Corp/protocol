@@ -3,7 +3,7 @@ import React from 'react'
 import {Card, Button, ListGroup, Row, Col} from "react-bootstrap"
 
 //can pass listing info into this function later
-const Listings = (numberOfListings) => {
+const Listings = () => {
   return (
     <div>
       {/* md is number of cards per row 
@@ -12,7 +12,7 @@ const Listings = (numberOfListings) => {
         {Array.from({ length: 4 }).map((_, idx) => (
           <Col>
             <Card>
-              <Card.Img variant="top" src="holder.js/100px160" />
+              <Card.Img variant="top" src="" />
               <Card.Body>
                 <Card.Title>Card title</Card.Title>
                 <Card.Text>
