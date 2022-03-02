@@ -6,7 +6,7 @@ import MortarLogo from "../components/MortarLogo.png"
 const Header = () => {
   return (
     <div style ={{"background-color": "#212529"}}>
-        <Nav class="site-header sticky-top py-1" usedbyfluent="true"
+        <Nav class="site-header sticky-top py-1" usedbyfluent="true">
           <div class="container d-flex flex-column flex-md-row justify-content-between" usedbyfluent="true">
             <NavLink class="py-2" href="/home">
               <img src = {MortarLogo} alt="Mortar" width = "120" height = "20"></img>
