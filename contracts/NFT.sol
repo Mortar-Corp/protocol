@@ -50,14 +50,16 @@ contract NFT is Initializable, ERC1155Upgradeable, OwnableUpgradeable, PausableU
         _unpause();
     }
 
+    // mints without data, then sets title string late
     function mint(string memory title) 
         public returns(uint256)
     {
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
+        bytes memory bytesTitle = bytes(title);
 
-        _mint(msg.sender, newItemId, 1, ""); // defaults to single NFT  
-        tokenTitles[newItemId] = title; // store ipfs of title.json for easier access
+        _mint(msg.sender, newItemId, 1, bytesTitle); // defaults to single NFT  
+        tokenTitles[newItemId] = title; // store strinfied title object in map for easier access
         // give Market contract approval
         setApprovalForAll(contractAddress, true); 
 
@@ -99,9 +101,9 @@ contract NFT is Initializable, ERC1155Upgradeable, OwnableUpgradeable, PausableU
     }
 
     // returns tokenURI
-    // function tokenURI (uint tokenId) public view returns (string memory)  {
-    //     return tokenURIs[tokenId];
-    // }
+    function tokenURI (uint tokenId) public view returns (string memory)  {
+        return tokenURIs[tokenId];
+    }
 
     // returns bytes data
     function getTokenTitle(uint tokenId) public view returns (string memory)  {
