@@ -22,7 +22,8 @@ contract Market is Initializable, OwnableUpgradeable, ReentrancyGuardUpgradeable
     function initialize() public initializer {
         _owner = payable(msg.sender);
     }
-
+ 
+    // TODO: add this data structur
     struct MarketToken {
         uint256 itemId; // market id
         address nftContract;
@@ -34,8 +35,10 @@ contract Market is Initializable, OwnableUpgradeable, ReentrancyGuardUpgradeable
         bool sold;
     }
 
-    // tokenId return which MarketToken -  fetch which one it is 
+    // tokens (tokenId to market token)
     mapping(uint256 => MarketToken) private idToMarketToken;
+    // transactions (txId to market token)
+    mapping(uint256 => MarketToken) private txToMarketToken;
 
     // listen to events
     event MarketTokenMinted (
@@ -63,6 +66,10 @@ contract Market is Initializable, OwnableUpgradeable, ReentrancyGuardUpgradeable
         uint256 newItemId = _itemIds.current();
         uint256 amount = 1;
         uint256 price = 0; // default (non-listed) price set to 0
+
+        // TODO: call PurchaseAndSaleAgreement contract
+
+        // TODO: require contractId
 
         idToMarketToken[newItemId] = MarketToken(
             newItemId,
@@ -174,7 +181,7 @@ contract Market is Initializable, OwnableUpgradeable, ReentrancyGuardUpgradeable
         uint price = idToMarketToken[itemId].price;
         uint tokenId = idToMarketToken[itemId].tokenId;
         require(msg.value == price, 'Please submit the asking price in order to continue');
-        require(amount <= idToMarketToken[itemId].tokenId, 'Amount is greater than number of shares outstanding');
+        require(amount <= idToMarketToken[itemId].amount, 'Amount is greater than number of shares outstanding');
 
         // transfer purchase price to the seller
         idToMarketToken[itemId].seller.transfer(msg.value);

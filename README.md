@@ -15,22 +15,14 @@ npx hardhat node
 ```
 
 ```
-npx hardhat run scripts/deploy.ts --network localhost
+npx hardhat run scripts/deploy-upgradable.ts --network local
 ```
 
-## deploy contracts to mumbai
+## deploy contracts to mrtr tesnet:
 
-```
 npx hardhat compile
-```
-
-```
-npx hardhat run scripts/deploy-upgradable.ts --network mumbai
-```
-
-```
-npx hardhat run scripts/deploy-upgrade.ts --network mumbai
-```
+npx hardhat run scripts/deploy-upgradable.ts --network mrtrTestnet
+npx hardhat run scripts/deploy-upgrade.ts --network mrtrTestnet
 
 ## deploy contracts to mainnet
 

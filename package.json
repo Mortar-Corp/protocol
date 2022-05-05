@@ -1,5 +1,5 @@
 {
-  "name": "avalanche-smart-contract-quickstart",
+  "name": "mrtr-protocol",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
     "@nomiclabs/hardhat-waffle": "^2.0.1",

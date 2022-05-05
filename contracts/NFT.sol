@@ -17,8 +17,19 @@ contract NFT is Initializable, ERC1155Upgradeable, OwnableUpgradeable, PausableU
     using CountersUpgradeable for CountersUpgradeable.Counter;
     CountersUpgradeable.Counter private _tokenIds;
     address contractAddress;
-    // Optional mapping for token URIs
+    // PSA mapping to tokenId
     mapping(uint256 => string) private tokenURIs;
+    // Titles mapping to tokens
+    mapping(uint256 => string) private tokenTitles;
+
+
+    struct PropertyToken {
+        uint256 tokenId;
+        string title;
+        // string psas[];
+    }
+    // Optional mapping for token URIs
+    // mapping(uint256 => string) private tokenURIs;
 
     function initialize(address marketplaceAddress) initializer public {
         __ERC1155_init("Mortar");
@@ -39,16 +50,16 @@ contract NFT is Initializable, ERC1155Upgradeable, OwnableUpgradeable, PausableU
         _unpause();
     }
 
-    function mint(string memory _tokenURI) 
+    function mint(string memory title) 
         public returns(uint256)
     {
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
 
-        _mint(msg.sender, newItemId, 1, ''); // defaults to single NFT 
-        tokenURIs[newItemId] = _tokenURI;
+        _mint(msg.sender, newItemId, 1, ""); // defaults to single NFT  
+        tokenTitles[newItemId] = title; // store ipfs of title.json for easier access
         // give Market contract approval
-        setApprovalForAll(contractAddress, true);
+        setApprovalForAll(contractAddress, true); 
 
         return newItemId;
     }
@@ -88,7 +99,12 @@ contract NFT is Initializable, ERC1155Upgradeable, OwnableUpgradeable, PausableU
     }
 
     // returns tokenURI
-    function tokenURI (uint tokenId) public view returns (string memory)  {
-        return tokenURIs[tokenId];
+    // function tokenURI (uint tokenId) public view returns (string memory)  {
+    //     return tokenURIs[tokenId];
+    // }
+
+    // returns bytes data
+    function getTokenTitle(uint tokenId) public view returns (string memory)  {
+        return tokenTitles[tokenId];
     }
 }
